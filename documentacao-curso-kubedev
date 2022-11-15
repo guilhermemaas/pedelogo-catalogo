@@ -1,0 +1,33 @@
+#Build Imagem:
+docker image build -t gmaas2/pedelogo-catalogo:1.0 -f ./src/PedeLogo.Catalogo.Api/Dockerfile .
+
+ 2272  kubectl apply -f k8s/mongodb/deployment.yml
+ 2273  kubectl apply -f k8s/mongodb/service.yml
+ 2274  kubectl get replicaset
+ 2275  kubectl get endpoints
+ 2276  kubectl get pods
+ 2277  kubectl describe pod mongodb-deployment-757c59547-m9h2b
+ 2278  kubectl apply -f k8s/mongodb/deployment.yml
+ 2279  kubectl apply -f k8s/mongodb/service.yml
+ 2280  kubectl get endpoints
+ 2281  kubectl get pods
+ 2282  kubectl apply -f k8s/api/deployment.yml
+ 2283  kubectl get deployments
+ 2284  kubectl get pods
+ 2285  kubectl describe pod api-deployment-5868cb6449-4f7st
+ 2286  kubectl apply -f k8s/api/deployment.yml
+ 2287  kubectl get pods
+ 2288  kubectl get replicaset
+ 2289  kubectl get endpoints
+ 2290  clear
+ 2291  kubectl apply -f k8s/api/service.yml
+ 2292  kubeclt get services
+ 2293  kubectl get all -o wide
+ 2294  docker image ls
+ 2295  docker container ls
+ 2296  docker container inspect 212 | grep Address
+
+
+
+#Acesso com NodePort:
+http://172.18.0.2:31341/swagger/index.html
