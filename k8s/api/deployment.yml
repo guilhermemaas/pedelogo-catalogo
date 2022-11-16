@@ -13,13 +13,18 @@ spec:
     spec:
       containers:
         - name: api 
-          image: gmaas2/pedelogo-catalogo:1.0
+          image: gmaas.azurecr.io/pedelogo-catalogo:1.0
           ports:
           - containerPort: 80
             name: http
           - containerPort: 443
             name: https
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healht
+              port: 80
+              scheme: HTTP
           envFrom:
             - configMapRef:
                 name: api-configmap
@@ -34,3 +39,5 @@ spec:
                 configMapKeyRef:
                   key: MONGO_INITDB_ROOT_PASSWORD
                   name: mongodb-configmap
+      imagePullSecrets:
+        - name: acr-gmaas
