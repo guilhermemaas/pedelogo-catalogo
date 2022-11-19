@@ -1,0 +1,17 @@
+apiVersion: v1 
+kind: PersistentVolume 
+metadata:
+  name: mongodb-pv 
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  #Delete -> iria excluir os dados
+  #Recycle -> Iria fazer remount caso fizesse o Claim novamente.
+  hostPath:
+    path: "/volumes/mongodb"
