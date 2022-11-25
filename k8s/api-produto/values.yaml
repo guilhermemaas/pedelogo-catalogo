@@ -1,0 +1,17 @@
+api: 
+  image: gmaas2/pedelogo-catalogo:1.0
+  serviceType: ClusterIP
+  ingress:
+  - pedelogo.127.0.0.1.nip.io
+  - pedeveloz.127.0.0.1.nip.io
+  - pederapido.127.0.0.1.nip.io
+
+mongodb: 
+  #existSecret: nome_do_secret
+  auth:
+    rootPassword: mongoroot
+    username: mongouser
+    password: mongopwd
+    database: produto
+  persistence:
+    enabled: false

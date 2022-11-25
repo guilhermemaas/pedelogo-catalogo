@@ -18,7 +18,7 @@ spec:
           command: ["sh", "-c", "until nslookup mongodb-service.default.svc.cluster.local; do echo Aguardando o Banco de Dados; sleep 2; done"]    
       containers:
         - name: api 
-          image: gmaas.azurecr.io/pedelogo-catalogo:1.0
+          image: gmaas2/pedelogo-catalogo:1.0
           resources:
             requests:
               memory: 32Mi
@@ -70,5 +70,30 @@ spec:
                 configMapKeyRef:
                   key: MONGO_INITDB_ROOT_PASSWORD
                   name: mongodb-configmap
-      imagePullSecrets:
-        - name: acr-gmaas
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchExpressions:
+                    - key: app 
+                      operator: In 
+                      values: 
+                        - "mongodb"
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 2
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchExpressions:
+                    - key: app 
+                      operator: In 
+                      values: 
+                        - "api"                            
+      #imagePullSecrets:
+      #  - name: acr-gmaas
+      #nodeSelector:
+      #  app: api
